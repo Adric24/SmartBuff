@@ -216,7 +216,8 @@ function SMARTBUFF_InitItemList()
   SMARTBUFF_RUNEAGILITY			= GetItemInfo(118630); -- "Hyper Augment Rune"
   SMARTBUFF_RUNESTRENGTH		= GetItemInfo(118631); -- "Stout Augment Rune"
   SMARTBUFF_RUNEINTELLECT		= GetItemInfo(118632); -- "Focus Augment Rune"
-  SMARTBUFF_RUNEEMPOWERED		= GetItemInfo(128482); --"Empowered Augement Rune"
+  SMARTBUFF_RUNEAEMPOWERED		= GetItemInfo(128482); --"Empowered Augement Rune"
+  SMARTBUFF_RUNEHEMPOWERED		= GetItemInfo(128475); --"Empowered Augement Rune"
   
   SMARTBUFF_FLASK1              = GetItemInfo(46377);  --"Flask of Endless Rage"
   SMARTBUFF_FLASK2              = GetItemInfo(46376);  --"Flask of the Frost Wyrm"
@@ -358,7 +359,7 @@ function SMARTBUFF_InitSpellIDs()
   SMARTBUFF_CAMOUFLAGE      = GetSpellInfo(51753); --"Camouflage"
   SMARTBUFF_AOTC            = GetSpellInfo(5118);  --"Aspect of the Cheetah"
   SMARTBUFF_AOTP            = GetSpellInfo(13159); --"Aspect of the Pack"
-  SMARTBUFF_AOTF            = GetSpellInfo(172106); --"Aspect of the Fox"
+--  SMARTBUFF_AOTF            = GetSpellInfo(172106); --"Aspect of the Fox"
   SMARTBUFF_AMMOI           = GetSpellInfo(162536); --"Incendiary Ammo"
   SMARTBUFF_AMMOP           = GetSpellInfo(162537); --"Incendiary Ammo"
   SMARTBUFF_AMMOF           = GetSpellInfo(162539); --"Frozen Ammo"
@@ -465,15 +466,15 @@ function SMARTBUFF_InitSpellIDs()
   -- Tracking
   SMARTBUFF_FINDMINERALS    = GetSpellInfo(2580);  --"Find Minerals"
   SMARTBUFF_FINDHERBS       = GetSpellInfo(2383);  --"Find Herbs"
-  SMARTBUFF_FINDTREASURE    = GetSpellInfo(2481);  --"Find Treasure"
-  SMARTBUFF_TRACKHUMANOIDS  = GetSpellInfo(19883); --"Track Humanoids"
-  SMARTBUFF_TRACKBEASTS     = GetSpellInfo(1494);  --"Track Beasts"
-  SMARTBUFF_TRACKUNDEAD     = GetSpellInfo(19884); --"Track Undead"
+--  SMARTBUFF_FINDTREASURE    = GetSpellInfo(2481);  --"Find Treasure"
+--  SMARTBUFF_TRACKHUMANOIDS  = GetSpellInfo(19883); --"Track Humanoids"
+--  SMARTBUFF_TRACKBEASTS     = GetSpellInfo(1494);  --"Track Beasts"
+--  SMARTBUFF_TRACKUNDEAD     = GetSpellInfo(19884); --"Track Undead"
   SMARTBUFF_TRACKHIDDEN     = GetSpellInfo(19885); --"Track Hidden"
-  SMARTBUFF_TRACKELEMENTALS = GetSpellInfo(19880); --"Track Elementals"
-  SMARTBUFF_TRACKDEMONS     = GetSpellInfo(19878); --"Track Demons"
-  SMARTBUFF_TRACKGIANTS     = GetSpellInfo(19882); --"Track Giants"
-  SMARTBUFF_TRACKDRAGONKIN  = GetSpellInfo(19879); --"Track Dragonkin"
+--  SMARTBUFF_TRACKELEMENTALS = GetSpellInfo(19880); --"Track Elementals"
+--  SMARTBUFF_TRACKDEMONS     = GetSpellInfo(19878); --"Track Demons"
+--  SMARTBUFF_TRACKGIANTS     = GetSpellInfo(19882); --"Track Giants"
+--  SMARTBUFF_TRACKDRAGONKIN  = GetSpellInfo(19879); --"Track Dragonkin"
 
   -- Racial
   SMARTBUFF_STONEFORM       = GetSpellInfo(20594); --"Stoneform"
@@ -578,12 +579,23 @@ function SMARTBUFF_InitSpellIDs()
   SMARTBUFF_BELIXIRMOP6     = GetSpellInfo(105682); --"Mad Hozen Elixir" B
   SMARTBUFF_BELIXIRMOP7     = GetSpellInfo(105681); --"Mantid Elixir" G
   SMARTBUFF_BELIXIRMOP8     = GetSpellInfo(105688); --"Monk's Elixir" B
+
+  -- Runes 
   
+
   SMARTBUFF_BRUNESTRENGTH	= GetSpellInfo(175439); -- "Stout Augmentation"
   SMARTBUFF_BRUNEAGILITY	= GetSpellInfo(175456); -- "Hyper Augmentation"
   SMARTBUFF_BRUNEINTELLECT  = GetSpellInfo(175457); -- "Focus Augmentation"
-  SMARTBUFF_RUNEEMPOWERED   = GetSpellInfo(190668); -- "Empower"
+  SMARTBUFF_RUNEAEMPOWERED   = GetSpellInfo(190668); -- "Empower"
+  SMARTBUFF_RUNEHEMPOWERED   = GetSpellInfo(190668); -- "Empower"
+  
+  SMARTBUFF_RUNEAEMPOWERED_1   = GetSpellInfo(175457); --"Focus Augmentation"
+  SMARTBUFF_RUNEAEMPOWERED_2   = GetSpellInfo(175456); --"Hyper Augmentation"
+  SMARTBUFF_RUNEAEMPOWERED_3   = GetSpellInfo(175439); --"Stout Augmentation"
 
+  S.LinkAugment             = { SMARTBUFF_RUNEAEMPOWERED_1, SMARTBUFF_RUNEAEMPOWERED_2, SMARTBUFF_RUNEAEMPOWERED_3 };  
+  
+  
   --if (SMARTBUFF_GOTW) then
   --  SMARTBUFF_AddMsgD(SMARTBUFF_GOTW.." found");
   --end
@@ -965,18 +977,25 @@ function SMARTBUFF_InitSpellList()
 	};
 	
   SMARTBUFF_RUNE = {
-	{SMARTBUFF_RUNESTRENGTH, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNESTRENGTH},
-	{SMARTBUFF_RUNEAGILITY, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNEAGILITY},
-	{SMARTBUFF_RUNEINTELLECT, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNEINTELLECT},
-    {SMARTBUFF_RUNEEMPOWERED, 60, SMARTBUFF_CONST_SCROLL, nil, SMARTBUFF_RUNEEMPOWERED}, 
+	{SMARTBUFF_RUNESTRENGTH, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNESTRENGTH, S.LinkAugment},
+	{SMARTBUFF_RUNEAGILITY, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNEAGILITY, S.LinkAugment},
+	{SMARTBUFF_RUNEINTELLECT, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_BRUNEINTELLECT, S.LinkAugment},
+    {SMARTBUFF_RUNEAEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED, S.LinkAugment}, 
+    {SMARTBUFF_RUNEHEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEHEMPOWERED, S.LinkAugment}, 
+    {SMARTBUFF_RUNEAEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_1, S.LinkAugment},
+    {SMARTBUFF_RUNEAEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_2, S.LinkAugment},
+    {SMARTBUFF_RUNEAEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_3, S.LinkAugment},
+    {SMARTBUFF_RUNEHEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_1, S.LinkAugment},
+    {SMARTBUFF_RUNEHEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_2, S.LinkAugment},
+    {SMARTBUFF_RUNEHEMPOWERED, 60, SMARTBUFF_CONST_RUNE, nil, SMARTBUFF_RUNEAEMPOWERED_3, S.LinkAugment},
 	};
   
   --      ItemId, SpellId, Duration [min]
   AddItem(102463, 148429,  10); -- Fire-Watcher's Oath
   AddItem(116115, 170869,  60); -- Blazing Wings
   AddItem( 43499,  58501,  10); -- Iron Boot Flask
-  AddItem( 54653,  75532,  30); -- Darkspear Pride
-  AddItem( 54651,  75531,  30); -- Gnomeregan Pride
+--  AddItem( 54653,  75532,  30); -- Darkspear Pride
+--  AddItem( 54651,  75531,  30); -- Gnomeregan Pride
   
   -- Potions
   SMARTBUFF_POTION = {
